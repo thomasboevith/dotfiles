@@ -1,0 +1,303 @@
+;; Load emacs package system. Add MELPA repository.
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+)
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+;; The directory to open files from as default
+(cd "~/") ; Home sweet home
+
+;; Disable backup
+(setq backup-inhibited t)
+
+;; Disable auto save
+(setq auto-save-default nil)
+
+;; Frame position, size and color settings
+(setq default-frame-alist  '(
+  (top . 000) (left . 0)
+  (width . 80) (height . 100)))
+
+;; Set ^H keystroke as backspace (standard readline keybinding)
+(global-set-key [(control h)] 'delete-backward-char)
+
+;; For title in window bar
+(setq frame-title-format "%f")
+
+;; Indentation
+;; Don't use tabs for indentation, use whitespace
+(setq-default indent-tabs-mode nil)
+(setq standard-indent 4)
+;; If you really *need* to insert tab: C-q (quoted-insert), e.g. C-q <tab>
+
+;; Recent opened files
+(require 'recentf)
+(setq recentf-max-saved-items 64
+      recentf-save-file "~/.recentf")
+(recentf-mode 1)
+
+(defun my-open-recentf ()
+  "Displays the recent files and runs isearch-forward."
+  (interactive)
+  (recentf-open-files)
+  (isearch-forward))
+
+(defun hr ()
+  "Insert horizontal ASCII ruler."
+  (interactive)
+  (insert "-------------------------------------------------------------------------------\n"))
+
+;; Keybord shortcuts
+(global-set-key [f5] 'isodatestamp)
+(global-set-key [f6] 'isodatetimestamp)
+(global-set-key [f7] 'diarytimestamp)
+
+(define-key global-map [home] 'move-beginning-of-line)
+(define-key global-map [end]  'end-of-line)
+(global-set-key [C-home] 'beginning-of-buffer)
+(global-set-key [C-end] 'end-of-buffer)
+(global-set-key [C-tab] 'switch-to-previous-buffer)
+
+;; My shortcuts
+(define-prefix-command 'th-map nil "myshortcut")
+(global-set-key (kbd "M-i") th-map)
+(define-key th-map "C" 'center-region)
+(define-key th-map "H" 'hr)
+(define-key th-map "c" 'comment-or-uncomment-region)
+(define-key th-map "d" 'delete-trailing-whitespace)
+(define-key th-map "m" 'lml)
+(define-key th-map "o" 'my-open-recentf)
+(define-key th-map "q" 'undo)
+(define-key th-map "r" 'qrr)
+(define-key th-map "s" 'sort-lines)
+(define-key th-map "S" 'speech)
+
+;; No startup and splash messages
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+
+;; Useful things for the status bar
+(setq display-time-format "%d %h %H:%M")
+(setq display-time-day-and-date t)
+(setq display-time-interval 59)
+(setq display-time-24hr-format t)
+(display-time)
+(line-number-mode 1)
+(column-number-mode 1)
+
+;; Emacs is a text editor, make sure your text files end in a newline
+(setq require-final-newline t)
+
+;; Button 2 pastes at cursor position and not at mouse position
+(global-set-key [mouse-2] 'yank)
+
+;; Font-lock for color-coding
+(global-font-lock-mode t)
+(setq-default font-lock-maximum-size nil) ;; Do whole buffer no matter how large
+
+;; Hide menu-bar, scroll-bar, and tool-bar
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+
+;; Setup colors
+;; M-x list-colors-display gives an exhausting list of colors
+(set-background-color "black")
+(set-foreground-color "white")
+(set-cursor-color "orange")
+
+;; Blinking cursor
+(blink-cursor-mode 1)
+
+;; Font
+(cond
+ (window-system
+  (set-face-font 'default
+       "-misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-15"
+)))
+
+;; Toggle between two recent buffers
+(defun switch-to-previous-buffer ()
+  (interactive)
+  (switch-to-buffer (other-buffer)))
+
+;; Show white spaces at the end of lines
+(setq-default show-trailing-whitespace t)
+
+;; Show matching parenthesis with color
+(show-paren-mode t)
+
+;; Insert timestamp
+;; Also useable (insert (format-time-string "%a, %d %b %Y %H:%M:%S %z")))
+(defun isodatetimestamp ()
+  "Insert ISO date and time at point. E.g. 2006-07-29 16:37:11 "
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d %H:%M:%S")))
+
+(defun isodatestamp ()
+  "Insert ISO date at point. E.g. 2006-07-29 "
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d ")))
+
+(defun diarytimestamp ()
+  "Insert my diary timestamp at point. E.g. 2006-07-29 16:36:45 (Saturday)"
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d %H:%M:%S \(%A\)\n\n-------------------------------------------------------------------------------\n")))
+
+;; Query-replace-regexp
+(defalias 'qrr 'query-replace-regexp)
+(defalias 'lml 'list-matching-lines)
+
+;; Use C-x C-m in stead of M-x
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
+
+(global-set-key [M-delete] 'kill-word)
+(global-set-key [C-M-insert] 'backward-kill-word)
+
+(global-set-key "\C-h" 'backward-delete-char)
+(global-set-key "\M-h" 'backward-delete-word)
+
+(defun kill-to-start-of-line ()
+  "kill from point to start of line"
+  (interactive)
+  (kill-line 0))
+
+(global-set-key (kbd "C-M-k") 'kill-to-start-of-line)
+(global-set-key (kbd "M-h") 'backward-kill-word)
+
+;; If you frequently work with lines, you might want to make copy
+;; (kill-ring-save) and cut (kill-region) work on lines when no region is
+;; selected
+(defadvice kill-ring-save (before slickcopy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+
+(defadvice kill-region (before slickcut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+
+(defun kill-to-end-of-buffer ()
+  "Kill all text from point to end of buffer"
+  (interactive)
+  (kill-region (point) (point-max))
+  )
+
+(defun kill-to-start-of-buffer ()
+  "Kill all text from point to start of buffer"
+  (interactive)
+  (kill-region (point) (point-min))
+  )
+
+(defun insert-url (&optional url)
+  "Downloads an URL with lynx and inserts it after the point"
+  (interactive "MUrl: ")
+  (when url
+    (message "Inserting %s" url)
+    (insert (concat "from: " url "\n\n"))
+    (call-process "lynx" nil (current-buffer) nil "-nolist" "-dump" url))
+  )
+
+;; Smarter moving of cursor
+(defun smarter-move-beginning-of-line (arg)
+  "Move point back to indentation of beginning of line.
+
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
+
+If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there."
+  (interactive "^p")
+  (setq arg (or arg 1))
+
+  ;; Move lines first
+  (when (/= arg 1)
+    (let ((line-move-visual nil))
+      (forward-line (1- arg))))
+
+  (let ((orig-point (point)))
+    (back-to-indentation)
+    (when (= orig-point (point))
+      (move-beginning-of-line 1))))
+
+;; Remap C-a to smarter-move-beginning-of-line
+(global-set-key [remap move-beginning-of-line]
+                'smarter-move-beginning-of-line)
+
+;; Scrolling without moving the cursor
+(defun scroll-down-keep-cursor ()
+   ;; Scroll the text one line down while keeping the cursor
+   (interactive)
+   (scroll-down 1))
+
+(defun scroll-up-keep-cursor ()
+   ;; Scroll the text one line up while keeping the cursor
+   (interactive)
+   (scroll-up 1))
+
+(global-set-key "\M-n"    'scroll-up-keep-cursor)
+(global-set-key "\M-p"    'scroll-down-keep-cursor)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (UN)-FILLERS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Wrap lines at this number of characters
+(setq default-fill-column 79)
+
+(defun unfill-paragraph ()
+  "Unfill the current paragraph."
+  (interactive) (with-unfilling 'fill-paragraph))
+(defalias 'unwrap-paragraph 'unfill-paragraph)
+
+(defun unfill-region ()
+  "Unfill the current region."
+  (interactive) (with-unfilling 'fill-region))
+(defalias 'unwrap-region 'unfill-region)
+
+(defun unfill-individual-paragraphs ()
+  "Unfill individual paragraphs in the current region."
+  (interactive) (with-unfilling 'fill-individual-paragraphs))
+(defalias 'unwrap-individual-paragraphs 'unfill-individual-paragraphs)
+
+(defun with-unfilling (fn)
+  (let ((fill-column 10000000)) (call-interactively fn)))
+
+(defun maybe-fill-region ()
+  "If MARK-ACTIVE then run FILL-REGION, otherwise run FILL-PARAGRAPH"
+  (interactive)
+  (if mark-active
+      (fill-region (point) (mark))
+    (fill-paragraph nil)))
+
+(global-set-key (kbd "M-q") 'maybe-fill-region)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; EXPAND
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key "\M- " 'hippie-expand)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; SPELLING
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MODES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; SKELETONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define-skeleton speech
+  "Insert a quoted speech" nil
+  "»" _ "«")
