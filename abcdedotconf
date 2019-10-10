@@ -18,8 +18,17 @@ FLAC=flac
 # be selected as '--best --another-option' etc.
 FLACOPTS='--verify --best'
 
+# Encoder for MP3
+MP3ENCODERSYNTAX=lame
+
+# Path to MP3 encoder
+LAME=lame
+
+# Options for MP3 encoder
+LAMEOPTS='-b 320'                           
+
 # Output type for FLAC.
-OUTPUTTYPE="flac"
+OUTPUTTYPE="flac,mp3"  # Use option -o mp3 to only output mp3
 
 # The cd ripping program to use. There are a few choices here: cdda2wav,
 # dagrab, cddafs (Mac OS X only) and flac.
