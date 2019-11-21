@@ -214,6 +214,11 @@ function extract()      # Handy Extract Program
         echo "'$1' is not a valid file!"
     fi
 }
+#-------------------------------------------------------------
+# Audio / Video
+#-------------------------------------------------------------
+alias youtube-dl-audio-m4a='youtube-dl -f bestaudio[ext=m4a] --embed-thumbnail --add-metadata'
+alias youtube-dl-audio-mp3='youtube-dl -f bestaudio --extract-audio --audio-format mp3'
 
 #-------------------------------------------------------------
 # Useful Shortcuts
