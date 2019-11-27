@@ -219,7 +219,8 @@ function extract()      # Handy Extract Program
 #-------------------------------------------------------------
 alias youtube-dl-audio-m4a='youtube-dl -f bestaudio[ext=m4a] --embed-thumbnail --add-metadata'
 alias youtube-dl-audio-mp3='youtube-dl -f bestaudio --extract-audio --audio-format mp3'
-
+alias youtube-dl-drtv-best="-f 'best[format_id!*=SpokenSubtitles][format_id!*=SignLanguage]'"
+alias youtube-dl-drtv-worst="-f 'worst[format_id!*=SpokenSubtitles][format_id!*=SignLanguage]'"
 #-------------------------------------------------------------
 # Useful Shortcuts
 #-------------------------------------------------------------
