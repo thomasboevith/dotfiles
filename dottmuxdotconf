@@ -1,0 +1,17 @@
+# Remap prefix from 'C-b' to 'C-u'                                                                                                                                                                                                                                                                                           
+unbind C-b
+set-option -g prefix C-u
+bind-key C-u send-prefix
+
+# Automatically set window title                                                                                                                                                                                                                                                                                             
+set-window-option -g automatic-rename on
+set-option -g set-titles on
+
+# Status line                                                                                                                                                                                                                                                                                                                
+set -g status-left '#[fg=white,bg=black]'
+set-option -g status-right "\                                                                                                                                                                                                                                                                                                
+#[fg=colour237, bg=colour214] %Y-%m-%d %H:%M \                                                                                                                                                                                                                                                                               
+"
+
+# C-u-u to cycle through panes                                                                                                                                                                                                                                                                                               
+bind C-u select-pane -t :.+
