@@ -6,6 +6,9 @@
 #-------------------------------------------------------------
 # Some settings
 #-------------------------------------------------------------
+# Set the terminal
+export TERM=xterm
+
 # These two options are useful for debugging:
 alias debug="set -o nounset; set -o xtrace"
 
