@@ -53,6 +53,8 @@
   (insert "-------------------------------------------------------------------------------\n"))
 
 ;; Keybord shortcuts
+(global-set-key [f3] 'orgdiary)
+(global-set-key [f4] 'orgtimestamp)
 (global-set-key [f5] 'isodatestamp)
 (global-set-key [f6] 'isodatetimestamp)
 (global-set-key [f7] 'diarytimestamp)
@@ -148,6 +150,16 @@
   "Insert my diary timestamp at point. E.g. 2006-07-29 16:36:45 (Saturday)"
   (interactive)
   (insert (format-time-string "%Y-%m-%d %H:%M:%S \(%A\)\n\n-------------------------------------------------------------------------------\n")))
+
+(defun orgtimestamp ()
+  "Insert org-mode date at point. E.g. <2020-03-10 Tue> "
+  (interactive)
+  (insert (format-time-string "<%Y-%m-%d %a> ")))
+
+(defun orgdiary ()
+  "Insert org-mode diary at point."
+  (interactive)
+  (insert (format-time-string "*** %Y-%m-%d %a\n<%Y-%m-%d %a> ")))
 
 ;; Query-replace-regexp
 (defalias 'qrr 'query-replace-regexp)
