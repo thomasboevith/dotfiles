@@ -159,7 +159,7 @@
 (defun orgdiary ()
   "Insert org-mode diary at point."
   (interactive)
-  (insert (format-time-string "*** %Y-%m-%d %a\n<%Y-%m-%d %a> ")))
+  (insert (format-time-string "*** %Y-%m-%d %a\n")))
 
 ;; Query-replace-regexp
 (defalias 'qrr 'query-replace-regexp)
