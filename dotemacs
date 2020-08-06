@@ -328,6 +328,9 @@ point reaches the beginning or end of the buffer, stop there."
 ("\\.inf\\'" . inform-mode))
 auto-mode-alist))
 
+;; Org mode
+(setq org-startup-folded "showall")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SKELETONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
