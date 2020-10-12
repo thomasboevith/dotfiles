@@ -316,6 +316,17 @@ auto-mode-alist))
 ;; Org mode
 (setq org-startup-folded "showall")
 
+(load-theme 'cyberpunk t)
+
+(setq org-todo-keywords
+      '((sequence "TODO" "NOW!" "WAIT" "|" "DONE")))
+
+(setq org-todo-keyword-faces
+      '(("TODO" . (:background "Black" :foreground "Green" :weight bold))
+        ("NOW!" . (:background "Black" :foreground "Magenta" :weight bold))
+        ("WAIT" . (:background "Black" :foreground "Yellow" :weight bold))
+        ("DONE" . (:background "Black" :foreground "Cyan" :weight bold))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SKELETONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
