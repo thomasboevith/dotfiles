@@ -54,7 +54,7 @@
   (insert "-------------------------------------------------------------------------------\n"))
 
 ;; Keybord shortcuts
-(global-set-key [f3] 'orgdiary)
+(global-set-key [f3] 'switch-to-previous-buffer)
 (global-set-key [f4] 'orgtimestamp)
 (global-set-key [f5] 'isodatestamp)
 (global-set-key [f6] 'isodatetimestamp)
