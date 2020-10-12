@@ -66,9 +66,6 @@
 (global-set-key [C-end] 'end-of-buffer)
 (global-set-key [C-tab] 'switch-to-previous-buffer)
 
-(global-set-key "\M-p" 'move-line-up)
-(global-set-key "\M-n" 'move-line-down)
-
 ;; My shortcuts
 (define-prefix-command 'th-map nil "myshortcut")
 (global-set-key (kbd "M-i") th-map)
@@ -260,19 +257,6 @@ point reaches the beginning or end of the buffer, stop there."
          (progn ,@body)
        (move-to-column column))))
 (put 'save-column 'lisp-indent-function 0)
-
-(defun move-line-up ()
-  (interactive)
-  (save-column
-    (transpose-lines 1)
-    (forward-line -2)))
-
-(defun move-line-down ()
-  (interactive)
-  (save-column
-    (forward-line 1)
-    (transpose-lines 1)
-    (forward-line -1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (UN)-FILLERS
