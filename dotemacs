@@ -73,6 +73,7 @@
 (define-key th-map "H" 'horizontalruler)
 (define-key th-map "c" 'comment-or-uncomment-region)
 (define-key th-map "d" 'delete-trailing-whitespace)
+(define-key th-map "k" 'kill-to-start-of-line)
 (define-key th-map "m" 'lml)
 (define-key th-map "o" 'my-open-recentf)
 (define-key th-map "q" 'undo)
@@ -181,7 +182,7 @@
   (interactive)
   (kill-line 0))
 
-(global-set-key (kbd "C-M-k") 'kill-to-start-of-line)
+(global-set-key (kbd "C-M-k") 'kill-whole-line)
 (global-set-key (kbd "M-h") 'backward-kill-word)
 
 ;; If you frequently work with lines, you might want to make copy
