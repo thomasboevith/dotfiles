@@ -48,7 +48,7 @@
   (recentf-open-files)
   (isearch-forward))
 
-(defun hr ()
+(defun horizontalruler ()
   "Insert horizontal ASCII ruler."
   (interactive)
   (insert "-------------------------------------------------------------------------------\n"))
@@ -70,7 +70,7 @@
 (define-prefix-command 'th-map nil "myshortcut")
 (global-set-key (kbd "M-i") th-map)
 (define-key th-map "C" 'center-region)
-(define-key th-map "H" 'hr)
+(define-key th-map "H" 'horizontalruler)
 (define-key th-map "c" 'comment-or-uncomment-region)
 (define-key th-map "d" 'delete-trailing-whitespace)
 (define-key th-map "m" 'lml)
