@@ -233,6 +233,7 @@ alias a2ps_1=' a2ps --header=asdf --portrait --rows=1 --columns=1'
 alias a2ps_4=' a2ps --header=asdf --portrait --rows=2 --columns=2'
 alias gifview='gifview -a'
 alias grep='grep --color=auto'
+alias xpwd='pwd | xclip'
 alias emacs='emacs -nw'
 emacsro() { # Read-only emacs
   emacs -nw "$1" --eval '(setq buffer-read-only t)'
