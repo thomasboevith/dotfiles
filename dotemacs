@@ -100,9 +100,6 @@
 ;; Button 2 pastes at cursor position and not at mouse position
 (global-set-key [mouse-2] 'yank)
 
-;; Enable using CTRL+V to paste (yank)
-(global-set-key (kbd "C-v") 'yank)
-
 ;; Font-lock for color-coding
 (global-font-lock-mode t)
 (setq-default font-lock-maximum-size nil) ;; Do whole buffer no matter how large
