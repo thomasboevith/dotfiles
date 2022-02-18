@@ -294,6 +294,10 @@ GIT_COMMITTER_NAME="Thomas Bøvith"
 GIT_AUTHOR_NAME="Thomas Bøvith"
 
 function lazygit() {
+    if test $# -eq 0; then
+        echo 'Usage: lazygit filename.txt "Commit message"'
+        exit 1
+    fi
     filename="$1"
     if test ! -e "$filename"; then
         echo "File not found: $filename ... exiting"
