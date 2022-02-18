@@ -296,20 +296,20 @@ GIT_AUTHOR_NAME="Thomas Bøvith"
 function lazygit() {
     if test $# -eq 0; then
         echo 'Usage: lazygit filename.txt "Commit message"'
-        exit 1
+        return
     fi
     filename="$1"
     if test ! -e "$filename"; then
-        echo "File not found: $filename ... exiting"
-        exit 1
+        echo "File not found: $filename"
+        return
     fi
     message="$2"
-    if test "$message" == ""; then
-        echo "Commit message not specified ... exiting"
-        exit 1
+    if test -z "$message"; then
+        echo "No commit message specified"
+        return
     fi
     echo "Adding, committing, and pushing file: $filename with message: $message"
-    read -p "Are you sure? (yes/no)" -n 1 -r
+    read -p "Are you sure? (yes/no) " -r
     if test "$REPLY" == "yes"; then        
         git add "$filename"
         git commit -m "$message" "$filename"
