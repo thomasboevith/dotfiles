@@ -293,6 +293,26 @@ GIT_AUTHOR_EMAIL=thomasboevith@users.noreply.github.com
 GIT_COMMITTER_NAME="Thomas Bøvith"
 GIT_AUTHOR_NAME="Thomas Bøvith"
 
+function lazygit() {
+    filename="$1"
+    if test ! -e "$filename"; then
+        echo "File not found: $filename ... exiting"
+        exit 1
+    fi
+    message="$2"
+    if test "$message" == ""; then
+        echo "Commit message not specified ... exiting"
+        exit 1
+    fi
+    echo "Adding, committing, and pushing file: $filename with message: $message"
+    read -p "Are you sure? (yes/no)" -n 1 -r
+    if test "$REPLY" == "yes"; then        
+        git add "$filename"
+        git commit -m "$message" "$filename"
+        git push
+    fi
+}
+
 #-------------------------------------------------------------
 # Paths
 #-------------------------------------------------------------
