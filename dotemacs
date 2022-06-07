@@ -81,6 +81,10 @@
 (define-key th-map "s" 'sort-lines)
 (define-key th-map "S" 'speech)
 
+;; Org-mode move subtree up or down
+(global-set-key (kbd "C-M-p") 'org-move-subtree-up)
+(global-set-key (kbd "C-M-n") 'org-move-subtree-down)
+
 ;; No startup and splash messages
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
